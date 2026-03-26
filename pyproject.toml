@@ -1,0 +1,38 @@
+[build-system]
+requires = ["scikit-build-core>=0.10", "apache-tvm-ffi>=0.1.7,<0.2"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "tokenizers-tvm-ffi"
+version = "0.1.0"
+description = "TVM-FFI wrapper for mlc-ai/tokenizers-cpp"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["apache-tvm-ffi>=0.1.7,<0.2"]
+
+[dependency-groups]
+dev = [
+  "cmake",
+  "ninja",
+  "pytest>=8.0",
+  "ruff>=0.6.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = ["python/tokenizers_tvm_ffi/_ffi_api.py", "3rdparty"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+
+[tool.scikit-build]
+wheel.py-api = "py3"
+wheel.packages = ["python/tokenizers_tvm_ffi"]
+wheel.install-dir = "tokenizers_tvm_ffi"
+build-dir = "build-wheel"
+cmake.version = "CMakeLists.txt"
+ninja.version = ">=1.11"
